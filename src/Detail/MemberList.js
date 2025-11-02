@@ -37,21 +37,30 @@ function MemberList() {
         )}
       </div>
 
+      <div className="mb-3">
+        <Member
+          key={activeList.owner}
+          userData={userMap[activeList.owner]}
+          listId={activeListId}
+          handlerMap={handlerMap}
+          isOwner={true}
+          canManage={false}
+          loggedInUser={loggedInUser}
+          readonly={isArchived}
+        />
+      </div>
+
+      {activeList.memberList.length > 0 && (
+        <div className="mb-2">
+          <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">{t('member')}</h3>
+        </div>
+      )}
+
       <div 
         className="overflow-hidden hover:overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent" 
-        style={{ maxHeight: "calc(100vh - 16rem)" }}
+        style={{ maxHeight: "calc(100vh - 22rem)" }}
       >
         <div className="grid gap-2">
-        <Member
-            key={activeList.owner}
-            userData={userMap[activeList.owner]}
-            listId={activeListId}
-            handlerMap={handlerMap}
-            isOwner={true}
-            canManage={false}
-            loggedInUser={loggedInUser}
-            readonly={isArchived}
-          />
           {activeList.memberList.map((memberId) => (
             <Member
               key={memberId}

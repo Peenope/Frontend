@@ -68,7 +68,10 @@ function ShoppingLists({ onListSelect }) {
 
       {showChart && (
         <div className="mb-4">
-          <ListBarChart lists={lists} />
+          <ListBarChart lists={lists.filter(list =>
+            (list.owner === loggedInUser || list.memberList.includes(loggedInUser)) &&
+            (showArchived ? list.archived : !list.archived)
+          )} />
         </div>
       )}
 

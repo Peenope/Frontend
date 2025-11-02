@@ -48,7 +48,7 @@ function Header() {
                 className="p-2 rounded-full bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors text-sm font-medium"
                 aria-label="Toggle language"
               >
-                {language.toUpperCase()}
+                {language === 'cs' ? 'CZ' : language.toUpperCase()}
               </button>
             </div>
             <div className="flex items-center gap-2">

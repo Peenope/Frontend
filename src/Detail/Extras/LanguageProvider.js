@@ -39,7 +39,12 @@ const translations = {
     Archive: "Archive",
     showArchived: "Show Archived",
     showActive: "Show Active",
-    SetActive: "Set Active"
+    SetActive: "Set Active",
+    confirmDeleteList: "Do you really want to delete the list?",
+    yes: "Yes",
+    no: "No",
+    purchased: "Purchased",
+    notPurchased: "Not purchased"
   },
   cs: {
     shoppingLists: "Nákupní seznamy",
@@ -77,7 +82,12 @@ const translations = {
     Archive: "Archivovat",
     showArchived: "Zobrazit Archivované",
     showActive: "Zobrazit aktivní",
-    SetActive: "Aktivovat"
+    SetActive: "Aktivovat",
+    confirmDeleteList: "Opravdu si přejete seznam smazat?",
+    yes: "Ano",
+    no: "Ne",
+    purchased: "Zakoupené",
+    notPurchased: "Nezakoupené"
   },
 };
 

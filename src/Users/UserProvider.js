@@ -19,19 +19,19 @@ function UserProvider({ children }) {
   const userMap = {
     u1: {
       id: "u1",
-      name: "Chance",
+      name: "Josef",
     },
     u2: {
       id: "u2",
-      name: "John",
+      name: "Karel",
     },
     u3: {
       id: "u3",
-      name: "Michael",
+      name: "Emil",
     },
     u4: {
       id: "u4",
-      name: "Andrew",
+      name: "Jirka",
     },
   };
 

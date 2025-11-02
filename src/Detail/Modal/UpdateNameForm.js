@@ -3,6 +3,7 @@ import { useLanguage } from '../Extras/LanguageProvider';
 
 function UpdateNameForm({ show, handleClose, data, handlerMap }) {
   const [value, setValue] = useState('');
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const { t } = useLanguage();
 
   useEffect(() => {
@@ -19,9 +20,18 @@ function UpdateNameForm({ show, handleClose, data, handlerMap }) {
     handleClose();
   };
 
-  const handleDelete = () => {
+  const handleDeleteClick = () => {
+    setShowConfirmDelete(true);
+  };
+
+  const handleConfirmDelete = () => {
     handlerMap.deleteList({ listId: data.id });
+    setShowConfirmDelete(false);
     handleClose();
+  };
+
+  const handleCancelDelete = () => {
+    setShowConfirmDelete(false);
   };
 
   const handleArchiveOrActivate = () => {
@@ -30,56 +40,81 @@ function UpdateNameForm({ show, handleClose, data, handlerMap }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white dark:bg-slate-800 p-8 rounded-lg shadow-xl w-full max-w-lg transition-colors duration-200">
-        <h3 className="text-xl font-medium mb-6 dark:text-white">{t('editList')}</h3>
-        <form onSubmit={handleSubmit} className="grid gap-6">
-          <div className="mb-4">
-            <label className="block text-base text-gray-600 dark:text-gray-400 mb-2">{t('name')}</label>
-            <input
-              type="text"
-              value={value}
-              onChange={e => setValue(e.target.value)}
-              className="w-full p-3 border rounded dark:bg-slate-700 dark:text-white dark:border-slate-600"
-            />
-          </div>
-         
-          <div className="flex justify-between mt-6">
-            <div className="flex gap-4">
-              <button
-                type="button"
-                onClick={handleArchiveOrActivate}
-                className="px-5 py-3 bg-yellow-500 text-white rounded hover:bg-yellow-600 dark:bg-yellow-600 dark:hover:bg-yellow-700"
-              >
-                {data.archived ? t('SetActive') : t('Archive')}
-              </button>
-              <button
-                type="button"
-                onClick={handleDelete}
-                className="px-5 py-3 bg-red-500 text-white rounded hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700"
-              >
-                {t('delete')}
-              </button>
+    <>
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div className="bg-white dark:bg-slate-800 p-8 rounded-lg shadow-xl w-full max-w-lg transition-colors duration-200">
+          <h3 className="text-xl font-medium mb-6 dark:text-white">{t('editList')}</h3>
+          <form onSubmit={handleSubmit} className="grid gap-6">
+            <div className="mb-4">
+              <label className="block text-base text-gray-600 dark:text-gray-400 mb-2">{t('name')}</label>
+              <input
+                type="text"
+                value={value}
+                onChange={e => setValue(e.target.value)}
+                className="w-full p-3 border rounded dark:bg-slate-700 dark:text-white dark:border-slate-600"
+              />
             </div>
-            <div className="flex gap-4">
-              <button
-                type="submit"
-                className="px-5 py-3 bg-green-500 text-white rounded hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700"
-              >
-                {t('save')}
-              </button>
+           
+            <div className="flex justify-between mt-6">
+              <div className="flex gap-4">
+                <button
+                  type="button"
+                  onClick={handleArchiveOrActivate}
+                  className="px-5 py-3 bg-yellow-500 text-white rounded hover:bg-yellow-600 dark:bg-yellow-600 dark:hover:bg-yellow-700"
+                >
+                  {data.archived ? t('SetActive') : t('Archive')}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleDeleteClick}
+                  className="px-5 py-3 bg-red-500 text-white rounded hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700"
+                >
+                  {t('delete')}
+                </button>
+              </div>
+              <div className="flex gap-4">
+                <button
+                  type="submit"
+                  className="px-5 py-3 bg-green-500 text-white rounded hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700"
+                >
+                  {t('save')}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleClose}
+                  className="px-5 py-3 bg-gray-200 dark:bg-slate-600 rounded hover:bg-gray-300 dark:hover:bg-slate-500 dark:text-white"
+                >
+                  {t('cancel')}
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      {showConfirmDelete && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-slate-800 p-8 rounded-lg shadow-xl w-full max-w-md transition-colors duration-200">
+            <h3 className="text-xl font-medium mb-6 dark:text-white">{t('confirmDeleteList')}</h3>
+            <div className="flex justify-end gap-4">
               <button
                 type="button"
-                onClick={handleClose}
+                onClick={handleCancelDelete}
                 className="px-5 py-3 bg-gray-200 dark:bg-slate-600 rounded hover:bg-gray-300 dark:hover:bg-slate-500 dark:text-white"
               >
-                {t('cancel')}
+                {t('no')}
+              </button>
+              <button
+                type="button"
+                onClick={handleConfirmDelete}
+                className="px-5 py-3 bg-red-500 text-white rounded hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700"
+              >
+                {t('yes')}
               </button>
             </div>
           </div>
-        </form>
-      </div>
-    </div>
+        </div>
+      )}
+    </>
   );
 }
 

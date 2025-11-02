@@ -16,7 +16,7 @@ function PieChart({ resolved, unresolved }) {
     { name: 'unresolved', value: unresolved, percentage: `${unresolvedPercentage}%` }
   ];
 
-  const COLORS = ['#22C55E', '#6B7280'];
+  const COLORS = ['#22C55E', '#EF4444'];
 
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percentage }) => {
     if (resolved === 0) {
@@ -91,8 +91,8 @@ function PieChart({ resolved, unresolved }) {
             {data.map((entry, index) => (
               <Cell 
                 key={`cell-${index}`} 
-                fill={resolved === 0 ? '#6B7280' : resolvedPercentage === 100 ? '#22C55E' : COLORS[index]} 
-                className={resolved === 0 ? "dark:fill-gray-500" : resolvedPercentage === 100 ? "dark:fill-green-500" : index === 0 ? "dark:fill-green-500" : "dark:fill-gray-500"}
+                fill={resolved === 0 ? '#EF4444' : resolvedPercentage === 100 ? '#22C55E' : COLORS[index]} 
+                className={resolved === 0 ? "dark:fill-red-500" : resolvedPercentage === 100 ? "dark:fill-green-500" : index === 0 ? "dark:fill-green-500" : "dark:fill-red-500"}
               />
             ))}
           </Pie>
@@ -104,7 +104,7 @@ function PieChart({ resolved, unresolved }) {
           <div className="flex items-center gap-3">
             <div className="w-4 h-4 rounded-full bg-green-500 dark:bg-green-500 shadow-sm" />
             <span className="text-base font-medium text-gray-700 dark:text-gray-200">
-              {t('resolved')}
+              {t('purchased')}
             </span>
           </div>
           <span className="text-base font-bold text-gray-800 dark:text-white">
@@ -113,13 +113,13 @@ function PieChart({ resolved, unresolved }) {
         </div>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-4 h-4 rounded-full bg-gray-500 dark:bg-gray-500 shadow-sm" />
+            <div className="w-4 h-4 rounded-full bg-red-500 dark:bg-red-500 shadow-sm" />
             <span className="text-base font-medium text-gray-700 dark:text-gray-200">
-              {t('unresolved')}
+              {t('notPurchased')}
             </span>
           </div>
           <span className="text-base font-bold text-gray-800 dark:text-white">
-          {unresolved}({unresolvedPercentage}%) 
+            {unresolved} ({unresolvedPercentage}%) 
           </span>
         </div>
         <div className="mt-1 pt-3 border-t border-gray-200 dark:border-slate-600">
